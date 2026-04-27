@@ -163,8 +163,16 @@ public class MainView {
             Button subtractButton = new Button("-");
             Button deleteButton = new Button("\uD83D\uDDD1");
 
+            final int productId = item.getProduct().getId();
+
             subtractButton.setOnAction(event -> showMessage("Por implementar"));
-            deleteButton.setOnAction(event -> showMessage("Por implementar"));
+
+            deleteButton.setOnAction(event -> {
+                OperationResult result = shoppingCartApp.removeProductFromCart(productId);
+                showMessage(result.getMessage());
+                refreshCart();
+                refreshCatalog();
+            });
 
             Region spacer = new Region();
             HBox.setHgrow(spacer, Priority.ALWAYS);
